@@ -99,6 +99,24 @@
   flex: 1;
 }
 
+.cart-item-image-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.cart-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .cart-item-emoji {
   font-size: 2.5rem;
 }

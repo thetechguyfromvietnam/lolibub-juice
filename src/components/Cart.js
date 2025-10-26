@@ -20,7 +20,17 @@ const Cart = ({ cart, total, onClose, onRemove, onUpdateQuantity, onCheckout }) 
             cart.map(item => (
               <div key={item.id} className="cart-item">
                 <div className="cart-item-info">
-                  <span className="cart-item-emoji">{item.image}</span>
+                  <div className="cart-item-image-wrapper">
+                    {item.image && typeof item.image === 'string' && item.image.startsWith('/images/') ? (
+                      <img 
+                        src={item.image} 
+                        alt={item.name}
+                        className="cart-item-image"
+                      />
+                    ) : (
+                      <span className="cart-item-emoji">{item.image}</span>
+                    )}
+                  </div>
                   <div className="cart-item-details">
                     <h4>{item.name}</h4>
                     <p className="cart-item-price">{(item.price * item.quantity)}k</p>
