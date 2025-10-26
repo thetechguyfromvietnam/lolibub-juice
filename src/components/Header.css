@@ -1,0 +1,143 @@
+.header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  padding: 0.8rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logo-image {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-text h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.store-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #16a085;
+  font-weight: 500;
+}
+
+.store-info span {
+  display: flex;
+  align-items: center;
+}
+
+.cart-button {
+  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  transition: transform 0.2s;
+  box-shadow: 0 3px 12px rgba(26, 188, 156, 0.3);
+}
+
+.cart-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(26, 188, 156, 0.5);
+}
+
+.cart-badge {
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0.6rem 0;
+  }
+  
+  .header-container {
+    padding: 0 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .logo {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .logo-image {
+    height: 35px;
+  }
+  
+  .logo-text {
+    display: none;
+  }
+  
+  .cart-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .logo-text {
+    display: block;
+  }
+  
+  .logo-text h1 {
+    font-size: 1.1rem;
+  }
+  
+  .store-info {
+    display: none;
+  }
+}
+
