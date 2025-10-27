@@ -167,7 +167,7 @@
   margin-bottom: 1.5rem;
 }
 
-.btn-send, .btn-new {
+.btn-print, .btn-send, .btn-new {
   width: 100%;
   padding: 1rem 2rem;
   border: none;
@@ -176,6 +176,17 @@
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-print {
+  background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+}
+
+.btn-print:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(155, 89, 182, 0.5);
 }
 
 .btn-send {
@@ -285,7 +296,7 @@
     padding: 0.8rem;
   }
   
-  .btn-send, .btn-new {
+  .btn-print, .btn-send, .btn-new {
     font-size: 1rem;
     padding: 0.9rem 1.5rem;
   }
