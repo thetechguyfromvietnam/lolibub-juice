@@ -1,37 +1,41 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './PaymentVerification.css';
+import { getSectionTitle } from '../utils/menuSections';
 
 const PaymentVerification = ({ orderNumber, cart, total, onPaymentVerified, onCancel }) => {
-  const [paymentProof, setPaymentProof] = useState(null);
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [customerAddress, setCustomerAddress] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
+  const [eventDate, setEventDate] = useState('');
+  const [deliveryWindow, setDeliveryWindow] = useState('');
+  const [peopleCount, setPeopleCount] = useState('');
+  const [notes, setNotes] = useState('');
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setIsUploading(true);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPaymentProof(reader.result);
-        setIsUploading(false);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const groupedItems = useMemo(() => {
+    return cart.reduce((acc, item) => {
+      if (!acc[item.category]) {
+        acc[item.category] = [];
+      }
+      acc[item.category].push(item);
+      return acc;
+    }, {});
+  }, [cart]);
 
   const handleSubmit = () => {
-    if (!customerName || !customerPhone || !customerAddress || !paymentProof) {
-      alert('Please fill in all required fields (name, phone, delivery address) and upload payment proof');
+    if (!customerName || !customerPhone || !customerAddress || !eventDate) {
+      alert('Vui lòng nhập đầy đủ họ tên, số điện thoại, địa chỉ giao và ngày giao trước khi xác nhận.');
       return;
     }
+
     onPaymentVerified({
       orderNumber,
       customerName,
       customerPhone,
       customerAddress,
-      paymentProof,
+      eventDate,
+      deliveryWindow,
+      peopleCount,
+      notes,
       cart,
       total
     });
@@ -41,136 +45,125 @@ const PaymentVerification = ({ orderNumber, cart, total, onPaymentVerified, onCa
     <div className="payment-verification">
       <div className="payment-content">
         <div className="payment-header">
-          <div className="success-icon">💳</div>
-          <h1>Payment Required</h1>
+          <div className="success-icon">🥗</div>
+          <h1>Xác nhận đơn Combamien</h1>
           <div className="order-number">
-            <p>Order Number</p>
+            <p>Mã đơn hàng</p>
             <h2>{orderNumber}</h2>
           </div>
         </div>
-        
-        <div className="payment-instructions">
-          <h3>📱 Payment Instructions:</h3>
-          <div className="qr-section">
-            <p className="instruction-text">
-              Please transfer <strong>{total}k</strong> to the following account:
-            </p>
-            <div className="qr-placeholder">
-              <div className="qr-code-container">
-                <p className="qr-label">Scan to Transfer</p>
-                <div className="qr-code-box">
-                  {(() => {
-                    // Try to load QR code image
-                    const qrImages = ['/images/qr-code.png', '/images/qr-code.jpg', '/images/qr.png', '/images/qr.jpg'];
-                    const existingQr = qrImages.find(src => {
-                      // Check if any QR code exists by trying to load it
-                      return true; // Will show placeholder if not found
-                    });
-                    
-                    // Check if QR code exists
-                    const img = new Image();
-                    let qrCodeSrc = null;
-                    qrImages.forEach(src => {
-                      img.src = src;
-                      qrCodeSrc = src;
-                    });
-                    
-                    return (
-                      <>
-                        <img 
-                          src="/images/qr-code.jpg" 
-                          alt="QR Code"
-                          className="qr-code-image"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                            if (e.target.nextSibling) e.target.nextSibling.style.display = 'block';
-                          }}
-                        />
-                        <div className="qr-fallback" style={{display: 'none'}}>
-                          <p className="qr-placeholder-text">📱 Loading QR code...</p>
-                          <p className="qr-note">Please add your QR code</p>
-                        </div>
-                      </>
-                    );
-                  })()}
-                </div>
-                <div className="bank-info">
-                  <p><strong>Bank:</strong> BIDV</p>
-                  <p><strong>Account:</strong> 0896894688</p>
-                  <p><strong>Name:</strong> VO THI THU HUYEN</p>
-                </div>
+
+        <div className="booking-summary">
+          {cart.length === 0 ? (
+            <p className="summary-empty">Chưa có món nào. Vui lòng quay lại menu để chọn món.</p>
+          ) : (
+            Object.entries(groupedItems).map(([category, items]) => (
+              <div key={category} className="summary-category">
+                <h3>{getSectionTitle(category)}</h3>
+                <ul className="summary-list">
+                  {items.map(item => (
+                    <li key={item.id}>
+                      <span>{item.quantity}× {item.name}</span>
+                      <span>{item.price * item.quantity}k</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            ))
+          )}
+
+          <div className="summary-total">
+            <span>Tổng tạm tính</span>
+            <span>{total}k</span>
           </div>
         </div>
 
         <div className="customer-form">
-          <h3>Your Information:</h3>
+          <h3>Thông tin nhận đơn</h3>
           <div className="form-group">
-            <label>Full Name *</label>
+            <label>Họ và tên *</label>
             <input 
               type="text" 
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              placeholder="Enter your name"
+              placeholder="Nhập tên của bạn"
               required
             />
           </div>
           <div className="form-group">
-            <label>Phone Number *</label>
+            <label>Số điện thoại *</label>
             <input 
               type="tel" 
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              placeholder="0896894688"
+              placeholder="0768130139"
               required
             />
           </div>
           <div className="form-group">
-            <label>Delivery Address *</label>
+            <label>Địa chỉ giao hàng *</label>
             <input 
               type="text" 
               value={customerAddress}
               onChange={(e) => setCustomerAddress(e.target.value)}
-              placeholder="Enter your delivery address"
+              placeholder="Nhập địa chỉ nhận hàng"
               required
             />
           </div>
-        </div>
-
-        <div className="payment-proof-section">
-          <h3>Upload Payment Proof *</h3>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="payment-proof-input"
-            id="payment-proof"
-          />
-          {paymentProof && (
-            <div className="payment-proof-preview">
-              <img src={paymentProof} alt="Payment proof" />
-              <button onClick={() => setPaymentProof(null)}>Remove</button>
+          <div className="form-grid">
+            <div className="form-group">
+              <label>Ngày giao *</label>
+              <input
+                type="date"
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+                required
+              />
             </div>
-          )}
-          {!paymentProof && !isUploading && (
-            <label htmlFor="payment-proof" className="upload-proof-button">
-              📸 Upload Transfer Screenshot
-            </label>
-          )}
+            <div className="form-group">
+              <label>Khung giờ mong muốn</label>
+              <input
+                type="text"
+                value={deliveryWindow}
+                onChange={(e) => setDeliveryWindow(e.target.value)}
+                placeholder="Ví dụ: 11:30 - 12:00"
+              />
+            </div>
+          </div>
+          <div className="form-grid">
+            <div className="form-group">
+              <label>Số phần ăn</label>
+              <input
+                type="number"
+                min="1"
+                value={peopleCount}
+                onChange={(e) => setPeopleCount(e.target.value)}
+                placeholder="Bao nhiêu phần ăn?"
+              />
+            </div>
+            <div className="form-group">
+              <label>Ghi chú thêm</label>
+              <input
+                type="text"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Ví dụ: ít cay, thêm nước chấm..."
+              />
+            </div>
+          </div>
         </div>
 
         <div className="action-buttons">
           <button className="btn-submit" onClick={handleSubmit}>
-            ✅ Confirm & Send Order
+            ✅ Gửi thông tin đặt món
           </button>
           <button className="btn-cancel" onClick={onCancel}>
-            Cancel Order
+            Huỷ
           </button>
         </div>
         
         <p className="info-note">
-          ⚠️ Your order will be processed after payment verification
+          ⚠️ Đội ngũ Combamien sẽ liên hệ xác nhận đơn và hướng dẫn thanh toán trong 15 phút.
         </p>
       </div>
     </div>

@@ -29,7 +29,7 @@ const MenuCard = ({ item, onAddToCart }) => {
         )}
         <div className="menu-card-footer">
           <button className="add-to-cart-btn" onClick={() => onAddToCart(item)}>
-            Add to Cart
+            Chọn món
           </button>
         </div>
       </div>

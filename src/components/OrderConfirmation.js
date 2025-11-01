@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './OrderConfirmation.css';
+import { getSectionTitle } from '../utils/menuSections';
 
 const OrderConfirmation = ({ orderNumber, cart, total, customerInfo, onNewOrder, onPhoneOrder }) => {
+  const groupedItems = useMemo(() => {
+    return cart.reduce((acc, item) => {
+      if (!acc[item.category]) {
+        acc[item.category] = [];
+      }
+      acc[item.category].push(item);
+      return acc;
+    }, {});
+  }, [cart]);
+
+  const getItemIcon = (item) => {
+    if (!item.image) return '🍽️';
+    return typeof item.image === 'string' && item.image.startsWith('/') ? '🍽️' : item.image;
+  };
 
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');
     const printDate = new Date().toLocaleString('vi-VN');
+    const categoryMarkup = Object.entries(groupedItems).map(([category, items]) => `
+            <div class="section-title">${getSectionTitle(category)}</div>
+            ${items.map(item => `
+              <div class="item-row">
+                <span class="item-name">${item.name}</span>
+                <span class="item-qty">${item.quantity}x</span>
+                <span>${item.price * item.quantity}k</span>
+              </div>
+            `).join('')}
+          `).join('');
     
     printWindow.document.write(`
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Receipt - ${orderNumber}</title>
+          <title>Hoá đơn Combamien - ${orderNumber}</title>
           <style>
             @media print {
               @page {
@@ -78,13 +103,17 @@ const OrderConfirmation = ({ orderNumber, cart, total, customerInfo, onNewOrder,
               border-top: 1px dashed #000;
               margin: 10px 0;
             }
+            .section-title {
+              font-weight: bold;
+              margin: 8px 0 4px;
+            }
           </style>
         </head>
         <body>
           <div class="header">
-            <h1>🍹 LOLIBUB JUICE 🍹</h1>
+            <h1>🥗 COMBAMIEN 🧡</h1>
             <div class="divider"></div>
-            <div style="font-size: 12px;">Receipt #${orderNumber}</div>
+            <div style="font-size: 12px;">Đơn hàng #${orderNumber}</div>
             <div style="font-size: 11px;">${printDate}</div>
           </div>
           
@@ -93,20 +122,16 @@ const OrderConfirmation = ({ orderNumber, cart, total, customerInfo, onNewOrder,
               <strong>Khách hàng:</strong><br/>
               ${customerInfo.customerName}<br/>
               📞 ${customerInfo.customerPhone}<br/>
-              📍 ${customerInfo.customerAddress}
+              📍 ${customerInfo.customerAddress}<br/>
+              📅 ${customerInfo.eventDate || 'Chưa cập nhật'}<br/>
+              🕒 ${customerInfo.deliveryWindow || 'Theo trao đổi'}<br/>
+              👥 ${customerInfo.peopleCount || 'Chưa cập nhật'} phần
               <div class="divider"></div>
             </div>
           ` : ''}
           
           <div class="items">
-            <strong>Order Details:</strong>
-            ${cart.map(item => `
-              <div class="item-row">
-                <span class="item-name">${item.name}</span>
-                <span class="item-qty">${item.quantity}x</span>
-                <span>${item.price * item.quantity}k</span>
-              </div>
-            `).join('')}
+            ${categoryMarkup}
           </div>
           
           <div class="total">
@@ -114,9 +139,9 @@ const OrderConfirmation = ({ orderNumber, cart, total, customerInfo, onNewOrder,
           </div>
           
           <div class="footer">
-            ✅ Payment Verified<br/>
-            Cảm ơn quý khách!<br/>
-            Thank you!
+            ✅ Đơn hàng đã ghi nhận<br/>
+            Combamien sẽ liên hệ xác nhận trong ít phút.<br/>
+            Xin cảm ơn!
           </div>
         </body>
       </html>
@@ -134,59 +159,81 @@ const OrderConfirmation = ({ orderNumber, cart, total, customerInfo, onNewOrder,
   return (
     <div className="order-confirmation">
       <div className="confirmation-content">
-        <div className="success-icon">✅</div>
-        <h1>Payment Verified!</h1>
+        <div className="success-icon">🥗</div>
+        <h1>Đơn hàng đã được tiếp nhận!</h1>
         <div className="order-number">
-          <p>Order Number</p>
+          <p>Mã đơn</p>
           <h2>{orderNumber}</h2>
         </div>
         
         {customerInfo && (
           <div className="customer-details">
-            <h3>Customer Information</h3>
+            <h3>Thông tin khách hàng</h3>
             <div className="customer-info-item">
-              <strong>Name:</strong> {customerInfo.customerName}
+              <strong>Tên:</strong> {customerInfo.customerName}
             </div>
             <div className="customer-info-item">
-              <strong>Phone:</strong> {customerInfo.customerPhone}
+              <strong>SĐT:</strong> {customerInfo.customerPhone}
             </div>
             <div className="customer-info-item">
-              <strong>Delivery Address:</strong> {customerInfo.customerAddress}
+              <strong>Địa chỉ:</strong> {customerInfo.customerAddress}
             </div>
+            <div className="customer-info-item">
+              <strong>Ngày giao:</strong> {customerInfo.eventDate || 'Đang cập nhật'}
+            </div>
+            {customerInfo.deliveryWindow && (
+              <div className="customer-info-item">
+                <strong>Khung giờ:</strong> {customerInfo.deliveryWindow}
+              </div>
+            )}
+            {customerInfo.peopleCount && (
+              <div className="customer-info-item">
+                <strong>Số phần:</strong> {customerInfo.peopleCount}
+              </div>
+            )}
+            {customerInfo.notes && (
+              <div className="customer-info-item">
+                <strong>Ghi chú:</strong> {customerInfo.notes}
+              </div>
+            )}
           </div>
         )}
         
         <div className="order-details">
-          <h3>Your Order:</h3>
-          {cart.map(item => (
-            <div key={item.id} className="order-item">
-              <span className="item-emoji">{item.image}</span>
-              <div className="item-details">
-                <span className="item-name">{item.name}</span>
-                <span className="item-quantity">Qty: {item.quantity}</span>
-              </div>
-              <span className="item-price">{(item.price * item.quantity)}k</span>
+          {Object.entries(groupedItems).map(([category, items]) => (
+            <div key={category} className="order-category">
+              <h3>{getSectionTitle(category)}</h3>
+              {items.map(item => (
+                <div key={item.id} className="order-item">
+                  <span className="item-emoji">{getItemIcon(item)}</span>
+                  <div className="item-details">
+                    <span className="item-name">{item.name}</span>
+                    <span className="item-quantity">Số lượng: {item.quantity}</span>
+                  </div>
+                  <span className="item-price">{(item.price * item.quantity)}k</span>
+                </div>
+              ))}
             </div>
           ))}
           
           <div className="order-total">
-            <p>Total: {total}k</p>
+            <p>Tổng tạm tính: {total}k</p>
           </div>
         </div>
         
         <p className="info-note">
-          ✅ Payment received. Your order will be prepared and delivered soon!
+          🎉 Combamien sẽ liên hệ để thống nhất thời gian giao và hướng dẫn thanh toán.
         </p>
         
         <div className="action-buttons">
           <button className="btn-print" onClick={handlePrint}>
-            🖨️ Print Receipt
+            🖨️ In hoá đơn tạm
           </button>
           <button className="btn-send" onClick={onPhoneOrder}>
-            📱 Send Order via Phone
+            📱 Gửi đơn qua Zalo/WhatsApp
           </button>
           <button className="btn-new" onClick={onNewOrder}>
-            Place New Order
+            Tạo đơn mới
           </button>
         </div>
       </div>

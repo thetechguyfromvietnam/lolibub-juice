@@ -44,7 +44,7 @@
 .cart-header h2 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #333;
+  color: #2f4b3a;
 }
 
 .close-cart {
@@ -129,7 +129,7 @@
 }
 
 .cart-item-price {
-  color: #1abc9c;
+  color: #3e6e4a;
   font-weight: 600;
 }
 
@@ -143,7 +143,7 @@
 }
 
 .cart-item-controls button {
-  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  background: linear-gradient(135deg, #5e8f68 0%, #3e6e4a 100%);
   color: white;
   border: none;
   width: 32px;
@@ -170,7 +170,7 @@
 .cart-footer {
   padding: 2rem;
   border-top: 2px solid #f0f0f0;
-  background: #f9f9f9;
+  background: #f3f8f5;
 }
 
 .cart-total {
@@ -183,13 +183,13 @@
 }
 
 .total-amount {
-  color: #1abc9c;
+  color: #3e6e4a;
   font-size: 2rem;
 }
 
 .checkout-btn {
   width: 100%;
-  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  background: linear-gradient(135deg, #5e8f68 0%, #3e6e4a 100%);
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -198,12 +198,19 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3);
+  box-shadow: 0 4px 15px rgba(62, 110, 74, 0.3);
 }
 
 .checkout-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26, 188, 156, 0.5);
+  box-shadow: 0 6px 20px rgba(62, 110, 74, 0.45);
+}
+
+.cart-note {
+  font-size: 0.85rem;
+  color: #4e6e59;
+  margin-bottom: 1rem;
+  line-height: 1.4;
 }
 
 @media (max-width: 768px) {

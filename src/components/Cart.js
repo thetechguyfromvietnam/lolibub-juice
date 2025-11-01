@@ -7,14 +7,14 @@ const Cart = ({ cart, total, onClose, onRemove, onUpdateQuantity, onCheckout }) 
       <div className="cart-overlay" onClick={onClose}></div>
       <div className="cart-panel">
         <div className="cart-header">
-          <h2>Your Order</h2>
+          <h2>Giỏ món Combamien</h2>
           <button className="close-cart" onClick={onClose}>✕</button>
         </div>
         
         <div className="cart-items">
           {cart.length === 0 ? (
             <div className="empty-cart">
-              <p>Your cart is empty</p>
+              <p>Chưa có món nào được chọn</p>
             </div>
           ) : (
             cart.map(item => (
@@ -49,11 +49,12 @@ const Cart = ({ cart, total, onClose, onRemove, onUpdateQuantity, onCheckout }) 
         {cart.length > 0 && (
           <div className="cart-footer">
             <div className="cart-total">
-              <span>Total:</span>
+              <span>Tạm tính:</span>
               <span className="total-amount">{total}k</span>
             </div>
+            <p className="cart-note">Giá tính theo ngàn đồng. Có thể thêm món bất kỳ chỉ 30k.</p>
             <button className="checkout-btn" onClick={onCheckout}>
-              Place Order 📞
+              Xác nhận đơn 📋
             </button>
           </div>
         )}

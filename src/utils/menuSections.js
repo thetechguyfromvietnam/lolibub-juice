@@ -13,12 +13,9 @@ export const getMenuSections = (items) => {
 
 export const getSectionTitle = (category) => {
   const titles = {
-    "Nước Ép Mix": "🍹 Nước Ép Mix (39k)",
-    "Trà Trái Cây": "🧋 Trà Trái Cây (35k)",
-    "Trà Sữa": "🥤 Trà Sữa",
-    "Yogurt": "🍓 Yogurt",
-    "Cafe": "☕ Cafe",
-    "Toppings": "⭐ Extra Toppings (+10k)"
+    "Mix Tự Chọn": "🥗 Mix Tự Chọn",
+    "Thực đơn Thứ 2": "🍽️ Thực đơn Thứ 2",
+    "Tuỳ chọn thêm": "➕ Tuỳ chọn thêm"
   };
   
   return titles[category] || category;

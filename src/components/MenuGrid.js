@@ -5,16 +5,20 @@ import { getMenuSections, getSectionTitle } from '../utils/menuSections';
 
 const MenuGrid = ({ items, onAddToCart }) => {
   const sections = getMenuSections(items);
-  const sectionOrder = ["Nước Ép Mix", "Trà Trái Cây", "Trà Sữa", "Yogurt", "Cafe", "Toppings"];
+  const sectionOrder = [
+    "Mix Tự Chọn",
+    "Thực đơn Thứ 2",
+    "Tuỳ chọn thêm"
+  ];
   
   return (
     <div className="menu-container">
       <div className="hero-section">
         <div className="hero-image-container">
-          <img src="/images/hero-image.jpg" alt="Fresh Juices" className="hero-image" />
+          <img src="/images/menu-hero.jpg" alt="Combamien văn phòng" className="hero-image" />
           <div className="hero-overlay">
-            <h2>🍹 Lolibub Juice - Fresh & Delicious!</h2>
-            <p>Vietnamese drinks made with love</p>
+            <h2>🥗 Combo Mix Chuẩn Cơm Nhà</h2>
+            <p>Đổi gió bữa trưa văn phòng với thực đơn Thứ 2 của Combamien</p>
           </div>
         </div>
       </div>

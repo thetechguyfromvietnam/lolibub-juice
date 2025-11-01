@@ -4,15 +4,16 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  background: linear-gradient(160deg, #f4fbf6 0%, #dbeee2 50%, #c4e3d0 100%);
 }
 
 .confirmation-content {
   background: white;
-  border-radius: 30px;
+  border-radius: 28px;
   padding: 3rem;
-  max-width: 600px;
+  max-width: 640px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(62, 110, 74, 0.2);
   text-align: center;
   animation: fadeInUp 0.5s ease;
 }
@@ -31,12 +32,12 @@
 .success-icon {
   font-size: 5rem;
   margin-bottom: 1rem;
-  animation: scaleIn 0.5s ease;
+  animation: scaleIn 0.6s ease;
 }
 
 @keyframes scaleIn {
   from {
-    transform: scale(0);
+    transform: scale(0.4);
   }
   to {
     transform: scale(1);
@@ -44,71 +45,77 @@
 }
 
 .confirmation-content h1 {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 700;
-  color: #333;
+  color: #3e6e4a;
   margin-bottom: 2rem;
 }
 
 .order-number {
-  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  background: linear-gradient(135deg, #5e8f68 0%, #3e6e4a 100%);
   color: white;
   padding: 2rem;
-  border-radius: 20px;
+  border-radius: 22px;
   margin-bottom: 2rem;
-  box-shadow: 0 8px 25px rgba(26, 188, 156, 0.3);
+  box-shadow: 0 8px 25px rgba(62, 110, 74, 0.3);
 }
 
 .order-number p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   opacity: 0.9;
   margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .order-number h2 {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 700;
 }
 
 .customer-details {
-  background: #e8f9f5;
+  background: #f0f7f2;
   padding: 1.5rem;
-  border-radius: 15px;
+  border-radius: 18px;
   margin-bottom: 2rem;
-  border-left: 4px solid #1abc9c;
+  border-left: 4px solid #5e8f68;
   text-align: left;
 }
 
 .customer-details h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #16a085;
+  color: #3e6e4a;
   margin-bottom: 1rem;
 }
 
 .customer-info-item {
   margin: 0.5rem 0;
-  color: #2c3e50;
+  color: #3e5e48;
   font-size: 0.95rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .customer-info-item strong {
-  color: #16a085;
-  margin-right: 0.5rem;
+  color: #3e6e4a;
+  min-width: 130px;
 }
 
 .order-details {
   text-align: left;
   margin-bottom: 2rem;
-  background: #f9f9f9;
-  padding: 1.5rem;
-  border-radius: 15px;
+  background: #f7fcf8;
+  padding: 1.8rem;
+  border-radius: 18px;
+  border: 1px solid rgba(79, 120, 86, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(143, 183, 152, 0.25);
 }
 
 .order-details h3 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: #3e6e4a;
 }
 
 .order-item {
@@ -117,8 +124,9 @@
   gap: 1rem;
   padding: 1rem;
   background: white;
-  border-radius: 10px;
-  margin-bottom: 0.75rem;
+  border-radius: 14px;
+  margin-bottom: 0.9rem;
+  border: 1px solid rgba(79, 120, 86, 0.1);
 }
 
 .item-emoji {
@@ -134,30 +142,30 @@
 
 .item-name {
   font-weight: 600;
-  color: #333;
+  color: #3e5e48;
 }
 
 .item-quantity {
   font-size: 0.9rem;
-  color: #666;
+  color: #4e6e59;
 }
 
 .item-price {
   font-weight: 700;
-  color: #1abc9c;
+  color: #3e6e4a;
   font-size: 1.1rem;
 }
 
 .order-total {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 2px solid #e0e0e0;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 2px solid rgba(79, 120, 86, 0.2);
 }
 
 .order-total p {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: #333;
+  color: #3e6e4a;
 }
 
 .action-buttons {
@@ -179,123 +187,108 @@
 }
 
 .btn-print {
-  background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+  background: linear-gradient(135deg, #8fb798 0%, #5e8f68 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+  box-shadow: 0 4px 15px rgba(94, 143, 104, 0.3);
 }
 
 .btn-print:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(155, 89, 182, 0.5);
+  box-shadow: 0 6px 20px rgba(62, 110, 74, 0.45);
 }
 
 .btn-send {
-  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  background: linear-gradient(135deg, #4f8f68 0%, #3e6e4a 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3);
+  box-shadow: 0 4px 15px rgba(62, 110, 74, 0.3);
 }
 
 .btn-send:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26, 188, 156, 0.5);
+  box-shadow: 0 6px 20px rgba(62, 110, 74, 0.45);
 }
 
 .btn-new {
-  background: #f0f0f0;
-  color: #333;
+  background: #e8f3ec;
+  color: #3e6e4a;
 }
 
 .btn-new:hover {
-  background: #e0e0e0;
+  background: #d7e9de;
   transform: translateY(-2px);
 }
 
 .info-note {
   text-align: center;
-  color: #1abc9c;
-  font-size: 0.9rem;
+  color: #3e6e4a;
+  font-size: 0.95rem;
   padding: 1rem;
-  background: #e8f9f5;
-  border-radius: 10px;
+  background: #e5f2e9;
+  border-radius: 12px;
   margin-bottom: 1.5rem;
   font-weight: 500;
+  border-left: 4px solid #5e8f68;
 }
 
 @media (max-width: 768px) {
   .order-confirmation {
     padding: 1rem;
   }
-  
+
   .confirmation-content {
     padding: 2rem 1.5rem;
-    border-radius: 20px;
+    border-radius: 22px;
   }
-  
+
   .success-icon {
     font-size: 4rem;
   }
-  
+
   .confirmation-content h1 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .order-number {
     padding: 1.5rem;
-    border-radius: 15px;
+    border-radius: 18px;
   }
-  
-  .order-number p {
-    font-size: 0.9rem;
-  }
-  
+
   .order-number h2 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
-  
+
   .customer-details {
     padding: 1.2rem;
     margin-bottom: 1.5rem;
   }
-  
-  .customer-details h3 {
-    font-size: 1.1rem;
-  }
-  
+
   .customer-info-item {
-    font-size: 0.9rem;
+    flex-direction: column;
+    gap: 0.2rem;
   }
-  
+
+  .customer-info-item strong {
+    min-width: auto;
+  }
+
   .order-details {
     padding: 1.2rem;
   }
-  
-  .order-details h3 {
-    font-size: 1.2rem;
-  }
-  
+
   .order-item {
-    padding: 0.8rem;
+    padding: 0.9rem;
     flex-wrap: wrap;
   }
-  
+
   .item-emoji {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
-  
-  .item-price {
-    font-size: 1rem;
-  }
-  
+
   .order-total p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
-  
-  .info-note {
-    font-size: 0.85rem;
-    padding: 0.8rem;
-  }
-  
+
   .btn-print, .btn-send, .btn-new {
     font-size: 1rem;
     padding: 0.9rem 1.5rem;

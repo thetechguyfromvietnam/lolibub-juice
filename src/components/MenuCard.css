@@ -2,21 +2,21 @@
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 5px 25px rgba(26, 188, 156, 0.12);
+  box-shadow: 0 5px 25px rgba(79, 120, 86, 0.12);
   transition: all 0.3s ease;
   cursor: pointer;
-  border: 1px solid rgba(26, 188, 156, 0.1);
+  border: 1px solid rgba(79, 120, 86, 0.12);
 }
 
 .menu-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(26, 188, 156, 0.25);
-  border-color: rgba(26, 188, 156, 0.3);
+  box-shadow: 0 12px 35px rgba(79, 120, 86, 0.25);
+  border-color: rgba(79, 120, 86, 0.35);
 }
 
 .menu-card-image {
   height: 200px;
-  background: linear-gradient(135deg, #e0f7fa 0%, #b2dfdb 100%);
+  background: linear-gradient(135deg, #f0f7f2 0%, #dcefe1 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,9 +34,24 @@
   border-radius: 25px;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #1abc9c;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  color: #3e6e4a;
+  box-shadow: 0 3px 10px rgba(62, 110, 74, 0.2);
   z-index: 10;
+}
+
+.extra-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 204, 128, 0.95);
+  color: #b34700;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(211, 84, 0, 0.25);
 }
 
 
@@ -73,19 +88,19 @@
 .menu-card-content h3 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: #2f4b3a;
   margin-bottom: 0.5rem;
 }
 
 .menu-card-description {
-  color: #666;
+  color: #4a5d51;
   font-size: 0.9rem;
   margin-bottom: 1rem;
   line-height: 1.5;
 }
 
 .menu-card-benefits {
-  color: #16a085;
+  color: #3e6e4a;
   font-size: 0.85rem;
   margin-bottom: 1rem;
   line-height: 1.5;
@@ -100,12 +115,12 @@
 }
 
 .ingredient-tag {
-  background: rgba(26, 188, 156, 0.1);
-  color: #16a085;
+  background: rgba(79, 120, 86, 0.1);
+  color: #3e6e4a;
   padding: 0.3rem 0.7rem;
   border-radius: 15px;
   font-size: 0.75rem;
-  border: 1px solid rgba(26, 188, 156, 0.2);
+  border: 1px solid rgba(79, 120, 86, 0.2);
   font-weight: 500;
 }
 
@@ -117,7 +132,7 @@
 }
 
 .add-to-cart-btn {
-  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  background: linear-gradient(135deg, #5e8f68 0%, #3e6e4a 100%);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -126,12 +141,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 3px 10px rgba(26, 188, 156, 0.3);
+  box-shadow: 0 3px 10px rgba(62, 110, 74, 0.3);
 }
 
 .add-to-cart-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 18px rgba(26, 188, 156, 0.5);
+  box-shadow: 0 5px 18px rgba(62, 110, 74, 0.45);
 }
 
 .add-to-cart-btn:active {

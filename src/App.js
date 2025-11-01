@@ -7,6 +7,7 @@ import MenuGrid from './components/MenuGrid';
 import Cart from './components/Cart';
 import PaymentVerification from './components/PaymentVerification';
 import OrderConfirmation from './components/OrderConfirmation';
+import { getSectionTitle } from './utils/menuSections';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -75,10 +76,39 @@ function App() {
   };
 
   const handlePhoneOrder = () => {
-    const orderDetails = cart.map(item => `${item.quantity}x ${item.name}`).join('%0A');
     const total = calculateTotal();
-    const message = `New Order ${orderNumber}%0A%0A${orderDetails}%0A%0ATotal: ${total}k`;
-    
+    const itemsByCategory = cart.reduce((acc, item) => {
+      if (!acc[item.category]) {
+        acc[item.category] = [];
+      }
+      acc[item.category].push(item);
+      return acc;
+    }, {});
+
+    const sections = Object.entries(itemsByCategory).map(([category, items]) => (
+      [getSectionTitle(category), ...items.map(item => `• ${item.quantity}x ${item.name}`)].join('%0A')
+    )).join('%0A%0A');
+
+    const customerLines = customerInfo ? [
+      `👤 ${customerInfo.customerName}`,
+      `📞 ${customerInfo.customerPhone}`,
+      `📍 ${customerInfo.customerAddress}`,
+      `📅 ${customerInfo.eventDate || 'Đang cập nhật'}`,
+      customerInfo.deliveryWindow ? `🕒 ${customerInfo.deliveryWindow}` : null,
+      customerInfo.peopleCount ? `👥 ${customerInfo.peopleCount} phần` : null,
+      customerInfo.notes ? `📝 ${customerInfo.notes}` : null,
+    ].filter(Boolean).join('%0A') : '';
+
+    const message = [
+      `Đơn Combamien ${orderNumber}`,
+      '',
+      sections || 'Chưa có món được chọn',
+      '',
+      `💰 Tạm tính: ${total}k`,
+      '',
+      customerLines
+    ].filter(Boolean).join('%0A');
+
     window.location.href = `https://wa.me/${settings.whatsappNumber}?text=${message}`;
   };
 

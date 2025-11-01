@@ -1,15 +1,15 @@
-// Configuration for Lolibub Juice
+// Configuration for Rice booking experience
 export const settings = {
   // Phone number for calling (format: +1234567890)
-  phoneNumber: '+1234567890',
+  phoneNumber: '+84768130139',
   
   // WhatsApp number for sending orders (format: 1234567890)
-  whatsappNumber: '1234567890',
+  whatsappNumber: '84768130139',
   
   // Store name
-  storeName: 'Lolibub Juice',
+  storeName: 'Combamien',
   
   // Store slogan
-  storeSlogan: 'Fresh & Delicious'
+  storeSlogan: 'Nhanh, Sạch, Ngon đủ vị'
 };
 
