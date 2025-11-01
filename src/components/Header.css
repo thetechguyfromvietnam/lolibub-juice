@@ -1,7 +1,7 @@
 .header {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(15, 118, 190, 0.08);
   padding: 0.8rem 0;
   position: sticky;
   top: 0;
@@ -38,7 +38,7 @@
 .logo-text h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #5e8f68 0%, #3e6e4a 100%);
+  background: linear-gradient(135deg, var(--color-primary-gradient-start) 0%, var(--color-primary-gradient-end) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -47,7 +47,7 @@
 
 .store-slogan {
   font-size: 0.85rem;
-  color: #4a7c5a;
+  color: var(--color-text-secondary);
   font-weight: 600;
   margin-top: 0.2rem;
 }
@@ -58,7 +58,7 @@
   gap: 0.5rem;
   margin-top: 0.25rem;
   font-size: 0.75rem;
-  color: #4e6e59;
+  color: var(--color-text-muted);
   font-weight: 500;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .cart-button {
-  background: linear-gradient(135deg, #5e8f68 0%, #3e6e4a 100%);
+  background: linear-gradient(135deg, var(--color-primary-gradient-start) 0%, var(--color-primary-gradient-end) 100%);
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
@@ -80,13 +80,13 @@
   align-items: center;
   gap: 0.5rem;
   position: relative;
-  transition: transform 0.2s;
-  box-shadow: 0 3px 12px rgba(62, 110, 74, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 10px 22px var(--color-shadow-soft);
 }
 
 .cart-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(62, 110, 74, 0.5);
+  box-shadow: 0 14px 28px var(--color-shadow-strong);
 }
 
 .cart-badge {

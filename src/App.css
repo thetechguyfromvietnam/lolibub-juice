@@ -1,5 +1,5 @@
 .App {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f4fbf6 0%, #e4f3e8 45%, #d4ebdb 100%);
+  background: linear-gradient(180deg, rgba(225, 243, 255, 0.96) 0%, rgba(255, 243, 214, 0.94) 48%, rgba(255, 220, 163, 0.9) 100%);
 }
 
